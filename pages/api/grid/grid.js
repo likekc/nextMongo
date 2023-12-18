@@ -1,10 +1,19 @@
 import { connectDB } from "@/util/database"
 import { ObjectId } from "mongodb"
+import { getServerSession } from "next-auth"
+import { authOptions } from "../auth/[...nextauth]"
 
+console.log("서버시작")
 export default async function handler(o, r) {
-    //    console.log(o.query)
-    const db = (await connectDB).db('Products')
-    let result = await db.collection('site_1')
-    .find({ parent : new ObjectId(o.query.id) }).toArray()
-    r.status(200).json(result)
+    let session = await getServerSession(o,r,authOptions)
+    //console.log(session.user, "서버:엑셀DB업로드 테스트 중===========")
+    //console.log(o.body)
+
+    if (o.method == 'POST'){
+        o.body = JSON.parse(o.body)
+        const db = (await connectDB).db('Products')
+        let result = await db.collection('site_1').insertMany(o.body);
+        console.log(result, "서버-----")
+        r.status(200).json(result)
+    }
 }    

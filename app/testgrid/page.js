@@ -53,9 +53,26 @@ const ExcelReader = () => {
     : [];
 
 
-  const Inserdata = useCallback( ()=> {
-
-  })  
+    const Inserdata = async () => {           //수집리스트 저장 버튼 수행
+      try {
+        // 서버 엔드포인트
+        const serverG = './api/grid/grid';
+    
+        // 서버로 엑셀 데이터 전송
+        const response = await fetch(serverG, {
+          method: 'POST',
+          body: JSON.stringify(excelData)
+        });
+    
+        const result = await response.json();
+        console.log(result, "<====grid서버요청결과");
+    
+        // 여기에서 필요한 UI 업데이트 등을 수행할 수 있습니다.
+      } catch (error) {
+        console.log(error);
+        // 에러 처리
+      }
+    };
 
   return (
     <div>
@@ -64,8 +81,7 @@ const ExcelReader = () => {
         <h2>Excel Data</h2>
         <div>
         <h3>수집이름</h3>
-          <input type="button" onClick={Inserdata} />
-          <input type="button" onClick={Inserdata} />
+          <input /> <input type="button" onClick={Inserdata} value="수집리스트 저장" />
         </div>
         <div className="ag-theme-quartz-dark" style={{ height: 400, width: '100%' }}>
           <AgGridReact 

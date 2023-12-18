@@ -11,7 +11,7 @@ export async function middleware(request){
     // NextResponse.rewrite()      //주소창은 안바뀜
 
     const session = await getToken({req : request})
-    console.log(session,"<-- 세션")
+    //console.log(session,"<-- 세션")
     return NextResponse.next()
 
     // if ( request.nextUrl.pathname.startsWith('/write')){

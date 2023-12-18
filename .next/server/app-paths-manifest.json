@@ -1,3 +1,4 @@
 {
+  "/detail/[p]/page": "app/detail/[p]/page.js",
   "/testgrid/page": "app/testgrid/page.js"
 }
