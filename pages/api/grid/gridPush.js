@@ -13,7 +13,7 @@ export default async function handler(o, r) {
         o.body = JSON.parse(o.body)
         const db = (await connectDB).db('Products')
         let result = await db.collection('site_1').insertMany(o.body);
-        console.log(result, "서버-----")
+        console.log("서버-----끝")
         r.status(200).json(result)
     }
 }    

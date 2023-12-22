@@ -8,7 +8,7 @@ import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 const ExcelReader = () => {
   
-  const [excelData, setExcelData] = useState(null);
+  let [excelData, setExcelData] = useState(null);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -29,60 +29,90 @@ const ExcelReader = () => {
     }
   };
 
+  // 엑셀 데이터의 첫 번째 열 가져오기
+  let firstRowData = excelData && excelData.length > 0 ? excelData[0] : null;
+  // columnDefs 생성
+  let columnDefs = firstRowData
+    ? Object.keys(firstRowData).map(key => ({
+      headerName: key, // 엑셀 데이터의 키를 사용하여 컬럼 헤더 생성
+      field: key,      // 엑셀 데이터의 키를 사용하여 필드 지정
+      }))
+    : [];
 
+
+  const pushDB = async () => {           //DB로 전송
+    try {
+        fetch('./api/grid/gridPush', {
+        method: 'POST',
+        body: JSON.stringify(excelData)
+      })
+      .then(res =>{
+          console.log(res.status)
+      })
+      
+    } catch (error) {
+      console.log(error);
+      // 에러 처리
+    }
+  };
+
+  const readDB = async () => {
+    try{
+      fetch('/api/grid/gridRead', {
+        method : 'GET'
+        })
+        .then(async res => {
+                const Data = await res.json()   //await 사용시에 async 필수
+                console.log(Data)
+
+                setExcelData(Data);
+
+                firstRowData = excelData && excelData.length > 0 ? excelData[0] : null;
+                // columnDefs 생성
+                const newcolumnDefs = firstRowData
+                   ? Object.keys(firstRowData).map(key => ({
+                     headerName: key, // 엑셀 데이터의 키를 사용하여 컬럼 헤더 생성
+                     field: key,      // 엑셀 데이터의 키를 사용하여 필드 지정
+                     }))
+                   : [];
+                  columnDefs = newcolumnDefs
+                }
+        )
+      } catch (error) {
+        console.error('Error fetching data:', error.message)
+      }
+  }
+    
+  const delDB = async () => {
+    console.log("delDB 실행"); 
+  }
+
+
+
+    //ag-grid 설정값
   const GridOptions = {
     pagination: true,       //페이지 나타내기
     paginationPageSize: 50,    //페이지에 나타날 라인수
     suppressHorizontalScroll: true
   };
-
   const defaultColDef ={
       resizable: true,
       sortable: true,
       filter: true
   };
 
-  // 엑셀 데이터의 첫 번째 열 가져오기
-  const firstRowData = excelData && excelData.length > 0 ? excelData[0] : null;
-  // columnDefs 생성
-  const columnDefs = firstRowData
-    ? Object.keys(firstRowData).map(key => ({
-        headerName: key, // 엑셀 데이터의 키를 사용하여 컬럼 헤더 생성
-        field: key,      // 엑셀 데이터의 키를 사용하여 필드 지정
-      }))
-    : [];
 
-
-    const Inserdata = async () => {           //수집리스트 저장 버튼 수행
-      try {
-        // 서버 엔드포인트
-        const serverG = './api/grid/grid';
-    
-        // 서버로 엑셀 데이터 전송
-        const response = await fetch(serverG, {
-          method: 'POST',
-          body: JSON.stringify(excelData)
-        });
-    
-        const result = await response.json();
-        console.log(result, "<====grid서버요청결과");
-    
-        // 여기에서 필요한 UI 업데이트 등을 수행할 수 있습니다.
-      } catch (error) {
-        console.log(error);
-        // 에러 처리
-      }
-    };
 
   return (
     <div>
-    <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
+    <input type="file" accept=".xlsx, .xls" onChange={handleFileChange}  />
     <div>
-        <h2>Excel Data</h2>
-        <div>
-        <h3>수집이름</h3>
-          <input /> <input type="button" onClick={Inserdata} value="수집리스트 저장" />
-        </div>
+      <div>
+        <button type="button" onClick={readDB}> DB 불러오기</button>
+        <button type="button" onClick={pushDB}> DB로 전송</button>
+        <button type="button" onClick={delDB}> DB에서 List 삭제</button>
+      </div>
+
         <div className="ag-theme-quartz-dark" style={{ height: 400, width: '100%' }}>
           <AgGridReact 
             rowData={excelData ? excelData : []} // 데이터가 없으면 빈 배열 전달
