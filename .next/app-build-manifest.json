@@ -1,19 +1,9 @@
 {
   "pages": {
-    "/list/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/list/page.js"
-    ],
-    "/error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/error.js"
-    ],
-    "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/app/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -21,30 +11,25 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
+    "/error": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/error.js"
+    ],
     "/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/detail/[p]/page": [
+    "/not-found": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/detail/[p]/page.js"
+      "static/chunks/app/not-found.js"
     ],
-    "/detail/[p]/error": [
+    "/list/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/detail/[p]/error.js"
-    ],
-    "/detail/[p]/loading": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/detail/[p]/loading.js"
-    ],
-    "/detail/[p]/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/detail/[p]/not-found.js"
+      "static/chunks/app/list/page.js"
     ],
     "/testgrid/page": [
       "static/chunks/webpack.js",

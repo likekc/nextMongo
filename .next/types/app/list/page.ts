@@ -1,4 +1,4 @@
-// File: C:\git\nextMongo\forum\app\list\page.js
+// File: /Users/mac/solution_a/nextMongo/nextMongo/app/list/page.js
 import * as entry from '../../../../app/list/page.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

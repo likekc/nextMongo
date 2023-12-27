@@ -1,4 +1,4 @@
-// File: C:\git\nextMongo\forum\app\layout.js
+// File: /Users/mac/solution_a/nextMongo/nextMongo/app/layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
