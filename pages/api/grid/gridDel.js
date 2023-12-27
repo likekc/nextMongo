@@ -9,14 +9,17 @@ export default async function handler(o, r) {
 
     if (o.method == 'POST'){
         o.body = JSON.parse(o.body)
-        
+        let deleteResult = []
         const db = (await connectDB).db('Products')
         for(const item of o.body) {
-            let result = await db.collection('site_1').deleteOne({Pid: item});
-            
+            const result = await db.collection('site_1').deleteOne({Pid: item});
+            deleteResult.push(result)
         }
+        
+        //console.log(deleteResult)
         console.log("gridDel 서버완료")
-        r.status(200)
-        //return r.status(200).redirect(302,'/list')
+        
+        r.status(200).json(deleteResult.length+"개 삭제완료");
+
     }    
 }

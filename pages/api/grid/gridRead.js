@@ -3,8 +3,9 @@ import { ObjectId } from "mongodb"
 import { getServerSession } from "next-auth"
 import { authOptions } from "../auth/[...nextauth]"
 
-console.log("gridRead 서버시작")
+
 export default async function handler(o, r) {
+    console.log("gridRead 서버시작")
     let session = await getServerSession(o,r,authOptions)
 
     if (o.method == 'GET'){

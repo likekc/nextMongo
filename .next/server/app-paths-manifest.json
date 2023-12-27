@@ -1,3 +1,6 @@
 {
-  "/grid/page": "app/grid/page.js"
+  "/write/page": "app/write/page.js",
+  "/list/page": "app/list/page.js",
+  "/grid/page": "app/grid/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }
