@@ -1,1 +1,10 @@
+<<<<<<< HEAD
 {}
+=======
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/api/grid/gridRead": "pages/api/grid/gridRead.js"
+}
+>>>>>>> adac60d3f72210dba44dc2031cdda4766408897e
