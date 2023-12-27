@@ -33,7 +33,7 @@ export default async function RootLayout({ children }) {
         : ''}>
       <div className="navbar"> 
         <Link href="/" className="logo">Asolution</Link>
-        <Link href="/testgrid">Grid</Link> 
+        <Link href="/grid">Grid</Link> 
         <Link href="/list">List</Link>
         <Link href="/write">Write</Link>
         {

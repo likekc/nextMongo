@@ -30,12 +30,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/list/page.js"
-    ],
-    "/testgrid/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/testgrid/page.css",
-      "static/chunks/app/testgrid/page.js"
     ]
   }
 }
