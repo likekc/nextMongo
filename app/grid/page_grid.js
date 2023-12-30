@@ -7,6 +7,7 @@ import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { Component } from 'ag-grid-community';
 //import { data } from 'autoprefixer';
 
+
 const Comp = p => {
   const onDollar = useCallback( ()=> window.alert('Dollar ' + p. value));
   

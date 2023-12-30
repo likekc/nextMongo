@@ -1,13 +1,13 @@
 @media(prefers-color-scheme:light){
   body{
-      background-color:white;
+      background-color:rgb(227, 227, 227);
       color:black;
   }
 }
 @media(prefers-color-scheme:dark){
   body{
       background-color:black;
-      color:white;
+      color:rgb(235, 235, 235);
   }
 }
 
