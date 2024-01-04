@@ -7,7 +7,7 @@ function App() {
     
     
     const location = {
-        country: isKorea ? '한국' : '일본'
+        country: isKorea ? '한국' : 'USA'
     }
 
 

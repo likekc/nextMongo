@@ -38,6 +38,26 @@ const printResult = (res) => {
   }
 };
 
+// const DB = (a) => {           //DB로 전송
+//   console.log = a
+//   if(a != null) {    
+//     try {
+//         fetch('./api/grid/gridPush1', {
+//         method: 'POST',
+//         body: JSON.stringify(a)
+//       })
+//       .then(res =>{
+//            console.log(res.status)
+//        })
+      
+//     } catch (error) {
+//       console.log(error);   // 에러 처리
+//     }
+//   }
+
+// };
+
+
 // 셀 랜더
 // class pushComp extends Component {
 //   render() {
@@ -129,7 +149,7 @@ const Grid = () => {
 
   const pushMeClicked = useCallback( e=>{     //선택취소 함수
     gridRef.current.api.deselectAll();
-  })
+  },[])
 
   // const statusBar = useMemo(() => {
   //   return {
@@ -156,7 +176,7 @@ const Grid = () => {
     gridRef.current.api.forEachNode(function (node) {
       rowData.push(node.data);
     });
-    console.log('Row Data:');
+    //console.log('Row Data:');
     console.table(rowData);
   }, []);
 
@@ -174,14 +194,33 @@ const Grid = () => {
   const onRemoveSelected = useCallback(() => {
     const selectedData = gridRef.current.api.getSelectedRows();
     const res = gridRef.current.api.applyTransaction({ remove: selectedData });
-    printResult(res);
+    //printResult(res);
   }, []);
 
-
-
   const onSelectionChanged=(event)=>{   //선택한 행 함수처리 , 콘솔로 표시
-    console.log(event.api.getSelectedRows())
+    console.log(event.api.getSelectedRows()) 
   }
+
+  const pushDB1 = useCallback(() => {
+    const pushData = gridRef.current.api.getSelectedRows();
+    fetch('/api/grid/gridPush1',{ method : 'POST', body: JSON.stringify(pushData)})
+    .then(res =>{
+      if(res.status === 200){
+        alert(pushData.length + "개의 데이터가 DB처리되었습니다.")
+        return res.json()
+      }
+      else {
+        console.log("처리실패: " + res.status)
+        return res.json()
+      }
+    })
+    .then(data=>{
+        console.log(data)
+    })
+
+  }, []);
+
+  
 
   return (
     <div style={containerStyle}>
@@ -191,7 +230,7 @@ const Grid = () => {
           <button onClick={onRemoveSelected}>선택삭제</button>&nbsp;&nbsp;&nbsp;
           <button onClick={gridUpdate}>Grid Update</button>
           <button onClick={clearData}>Grid Clear</button>
-          <button onClick={pushMeClicked}>DB업로드</button>
+          <button onClick={pushDB1}>선택행 DB업로드</button>
           <button onClick={pushMeClicked}>DB업데이트</button>
           <AgGridReact
             ref={gridRef} 

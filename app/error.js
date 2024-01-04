@@ -1,7 +1,7 @@
 'use client'
 
 export default function Error({error, reset}){
-    console.log(error)
+    //console.log(error)
     return (
         <div>
             <h4>에러</h4>

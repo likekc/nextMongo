@@ -43,7 +43,7 @@ const DataReader = () => {
       : [];
 
   useEffect(()=>{
-    console.log("유즈이팩")
+    //console.log("유즈이팩")
     readDB();  
   }, [c] )
   
